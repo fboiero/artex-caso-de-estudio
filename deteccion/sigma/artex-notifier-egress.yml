@@ -1,0 +1,31 @@
+title: Egress a notificadores usados por ARTEX
+id: a1f0c2e4-artex-notify-0002
+status: experimental
+description: >
+  Detecta tráfico saliente hacia los endpoints de notificación que ARTEX integra
+  (Telegram, DingTalk, WeChat Work, Feishu) desde hosts que no deberían notificar.
+  Posible canal de exfiltración/alertas del operador.
+references:
+  - Auditoria interna AUD-ARTEX-2026-11 (modulo notify/)
+author: F. Boiero
+date: 2026/11/20
+logsource:
+  category: proxy
+detection:
+  selection:
+    c-uri-host:
+      - 'api.telegram.org'
+      - 'oapi.dingtalk.com'
+      - 'qyapi.weixin.qq.com'
+      - 'open.feishu.cn'
+  filter_known:
+    src_ip:
+      - '10.0.0.0/8'       # reemplazar por hosts que SÍ pueden notificar (allowlist)
+  condition: selection and not filter_known
+falsepositives:
+  - Aplicaciones de negocio que legítimamente usan estos servicios (ajustar allowlist)
+level: medium
+tags:
+  - attack.exfiltration
+  - attack.t1567
+  - artex

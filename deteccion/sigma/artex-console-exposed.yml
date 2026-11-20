@@ -1,0 +1,32 @@
+title: Consola ARTEX expuesta (puertos 8787/8788)
+id: a1f0c2e4-artex-console-0001
+status: experimental
+description: >
+  Detecta un proceso escuchando en los puertos de consola/proxy de ARTEX (8787, 8788),
+  especialmente con bind a 0.0.0.0. Indicador de un despliegue de ARTEX o un fork renombrado.
+references:
+  - FBI FLASH-20261113-001
+  - Auditoria interna AUD-ARTEX-2026-11
+author: F. Boiero
+date: 2026/11/20
+logsource:
+  category: network_connection
+  product: sysmon            # Sysmon Event ID 3 / o tu fuente equivalente
+detection:
+  selection:
+    Initiated: 'false'
+    DestinationPort:
+      - 8787
+      - 8788
+  selection_bind:
+    SourceIp: '0.0.0.0'
+    SourcePort:
+      - 8787
+      - 8788
+  condition: selection or selection_bind
+falsepositives:
+  - Servicios internos legítimos que usen 8787/8788 (crear allowlist por host)
+level: medium
+tags:
+  - attack.command_and_control
+  - artex

@@ -1,0 +1,24 @@
+title: Ráfaga de actividad agéntica (pentest autónomo)
+id: a1f0c2e4-artex-burst-0003
+status: experimental
+description: >
+  Detecta una ráfaga anómala de acciones/requests desde un mismo origen hacia activos
+  internos en una ventana corta, consistente con un agente autónomo (ARTEX) ejecutando
+  muchas herramientas por segundo. Correlacionar con llamadas salientes a APIs de LLM.
+references:
+  - CSA "ARTEX and Its Forks" (2026-11-16)
+author: F. Boiero
+date: 2026/11/20
+logsource:
+  category: proxy
+detection:
+  selection:
+    src_ip|exists: true
+  timeframe: 10s
+  condition: selection | count() by src_ip > 100     # ajustar umbral a la línea base
+falsepositives:
+  - Escáneres de vulnerabilidades autorizados, CI/CD, crawlers internos (allowlist)
+level: low
+tags:
+  - attack.discovery
+  - artex

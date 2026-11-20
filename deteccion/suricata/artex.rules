@@ -1,0 +1,17 @@
+# Reglas Suricata — detección de indicadores de ARTEX (puntos de partida; ajustar SID/umbral)
+# Autor: F. Boiero — 2026-11-20. Material defensivo.
+# Nota: usar sid >= 1000000 (rango local). Revisar HOME_NET/EXTERNAL_NET en tu suricata.yaml.
+
+# 1) Acceso a la consola ARTEX en 8787/8788 (HTTP) dentro de la red
+alert http $HOME_NET any -> $HOME_NET [8787,8788] (msg:"ARTEX posible consola (8787/8788)"; flow:to_server,established; http.uri; content:"/setup"; nocase; classtype:trojan-activity; sid:1000801; rev:1;)
+
+# 2) Banner/endpoint de API de la consola
+alert tcp $HOME_NET any -> $HOME_NET [8787,8788] (msg:"ARTEX posible servicio en 8787/8788"; flow:to_server,established; dsize:>0; threshold:type limit, track by_src, count 1, seconds 300; classtype:trojan-activity; sid:1000802; rev:1;)
+
+# 3) Egress a notificadores (TLS SNI) usados por ARTEX
+alert tls $HOME_NET any -> $EXTERNAL_NET 443 (msg:"ARTEX egress a notificador (Telegram)"; tls.sni; content:"api.telegram.org"; nocase; classtype:policy-violation; sid:1000803; rev:1;)
+alert tls $HOME_NET any -> $EXTERNAL_NET 443 (msg:"ARTEX egress a notificador (DingTalk)"; tls.sni; content:"oapi.dingtalk.com"; nocase; classtype:policy-violation; sid:1000804; rev:1;)
+alert tls $HOME_NET any -> $EXTERNAL_NET 443 (msg:"ARTEX egress a notificador (Feishu)"; tls.sni; content:"open.feishu.cn"; nocase; classtype:policy-violation; sid:1000805; rev:1;)
+
+# 4) Marcador del emulador benigno de validación (para probar que las reglas disparan)
+alert http $HOME_NET any -> $HOME_NET any (msg:"ARTEX emulador de validacion (benigno)"; flow:to_server,established; http.header; content:"X-Artex-Emulator"; classtype:not-suspicious; sid:1000806; rev:1;)

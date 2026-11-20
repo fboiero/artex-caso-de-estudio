@@ -1,0 +1,1 @@
+{"allow_users":["app-legit"],"allow_pids":[1234],"burst_distinct_dst":80,"llm_hosts":["api.deepseek.com","open.bigmodel.cn","api.x.ai"]}
