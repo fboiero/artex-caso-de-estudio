@@ -3,16 +3,40 @@
 Material de **research, auditoría y docencia** sobre **ARTEX**, un framework open source de
 pentest autónomo con agentes de IA, señalado por la alerta FLASH del FBI (FLASH-20261113-001)
 por uso malicioso generalizado. Preparado para la cátedra de **Seguridad Informática
-(UTN FRVM)**.
+(UTN FRVM)**. Corte de información: **noviembre 2026**.
 
 > ⚠️ **Aviso ético.** Este repositorio es material de análisis, auditoría y defensa. **No**
 > incluye ni redistribuye el código de ARTEX, ni habilita su uso ofensivo. No ejecutes la
 > herramienta contra sistemas de terceros. No uses imágenes precompiladas de terceros.
 
+## 🔑 Hallazgos clave
+
+1. **El código base no tiene backdoor.** La fama de "herramienta con backdoor" aplica a
+   **imágenes de terceros** y al **uso ofensivo**, no al código fuente (verificado también por
+   BadByte).
+2. **El riesgo es por fork.** El ecosistema va de copias fieles a variantes **endurecidas**
+   (defensivas) y forks **weaponizados** (reverse shell, webshell cifrado, C2).
+3. **El borrado de código es el mejor predictor de riesgo:** los fieles borran 0 archivos del
+   original; los weaponizados borran decenas o cientos.
+4. **El ecosistema se descentralizó:** más de **12.000 forks**; el autor ya no lo controla;
+   forks mantenidos superan al upstream (v0.5.1), con **1.465 consolas expuestas** y 10,6%
+   co-alojando C2.
+5. **La defensa es por comportamiento, no por nombre** (los forks se renombran): consolas
+   8787/8788, egress a notificadores, ráfaga agéntica. Ver `deteccion/`.
+
 ## 📄 Informe consolidado (empezá acá)
 
 **`informes/INFORME-MAESTRO-ARTEX.pdf`** — estado actual: resumen ejecutivo, revisión de
-código, procedencia y auditoría de forks, con datos a noviembre 2026.
+código, procedencia y auditoría de forks.
+
+## 🧭 Cómo leer según tu rol
+
+- **Alumno / docente:** `ARTEX-caso-de-estudio.pdf` (presentación) → `HANDOUT-alumnos.pdf` →
+  `06-material-clase.md` (práctico). Dudas de términos: `GLOSARIO.md`.
+- **Auditor / investigador:** `INFORME-MAESTRO` → `GUIA-TECNICA-Y-REVISION` (estructura +
+  **playbook para auditar un fork**) → `INFORME-AUDITORIA-FORKS` + `ANEXO`.
+- **Defensor / blue team:** `deteccion/README-deteccion.pdf` → reglas `sigma/`, `suricata/`,
+  `zeek/` → `detector/` (sensor en vivo) + `dashboard/` + `emulador/` (validación benigna).
 
 ## 📁 Contenido
 
@@ -27,14 +51,16 @@ código, procedencia y auditoría de forks, con datos a noviembre 2026.
 | `GUIA-TECNICA-Y-REVISION-ARTEX` | Estructura, seguridad y **playbook para auditar un fork** |
 
 ### Detección y defensa (`deteccion/`)
-Reglas **Sigma** y **Suricata**, diseño de **laboratorio de contención** y un **emulador
-benigno** para validar la detección sin ejecutar ARTEX. Ver `deteccion/README-deteccion.pdf`.
+Reglas **Sigma**, **Suricata** y **Zeek**, un **detector** de host en vivo + **dashboard**,
+diseño de **laboratorio de contención** y un **emulador benigno** para validar la detección
+sin ejecutar ARTEX. Ver `deteccion/README-deteccion.pdf`.
 
 ### Material de clase
 | Archivo | Tema |
 |---|---|
 | `ARTEX-caso-de-estudio.pdf` / `.pptx` | Presentación (30 slides, con notas del orador) |
 | `HANDOUT-alumnos.pdf` / `.md` | Hoja resumen para repartir |
+| `GLOSARIO.md` | Términos clave explicados |
 | `01-arquitectura-artex.md` | Agentes, skills, planner, retest, stack |
 | `02-fallas-seguridad.md` | Fallas del propio ARTEX |
 | `03-timeline-abuso.md` | Cronología + estado actual (nov 2026) |
@@ -44,17 +70,10 @@ benigno** para validar la detección sin ejecutar ARTEX. Ver `deteccion/README-d
 | `08-enseñanzas.md` | Metodología y enseñanzas |
 | `09-analisis-del-proyecto.md` | Cómo está construido, cómo evoluciona, qué hacer al descargarlo |
 
-## 🎓 Cómo usar este repositorio
-
-1. Leé el **informe maestro** para el panorama.
-2. Para dar la clase: la **presentación** + el **handout** + la guía del práctico (`06`).
-3. Para auditar un fork vos mismo: el **playbook** de `GUIA-TECNICA-Y-REVISION-ARTEX`.
-4. Para defender/detectar: el paquete `deteccion/`.
-
 ## Fuentes
 
 Reportes públicos (CSA, Censys, SOCRadar, Brandefense, Ostorlab, Dark Reading, Obsidian
 Security, CERT-EU, Microsoft, Mandiant/Google, Wiz) y revisión directa del código. URLs al pie
 de cada documento.
 
-_Autor: Fernando Boiero — Investigador principal._
+_Autor: Fernando Boiero — Investigador principal. Material educativo; citar la fuente al reutilizar._
