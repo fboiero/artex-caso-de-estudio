@@ -32,7 +32,7 @@ código, procedencia y auditoría de forks.
 ## 🧭 Cómo leer según tu rol
 
 - **Alumno / docente:** `ARTEX-caso-de-estudio.pdf` (presentación) → `HANDOUT-alumnos.pdf` →
-  `06-material-clase.md` (práctico). Dudas de términos: `GLOSARIO.md`.
+  `clase/05-material-clase.md` (práctico). Dudas de términos: `GLOSARIO.md`.
 - **Auditor / investigador:** `INFORME-MAESTRO` → `GUIA-TECNICA-Y-REVISION` (estructura +
   **playbook para auditar un fork**) → `INFORME-AUDITORIA-FORKS` + `ANEXO`.
 - **Defensor / blue team:** `deteccion/README-deteccion.pdf` → reglas `sigma/`, `suricata/`,
@@ -58,22 +58,27 @@ sin ejecutar ARTEX. Ver `deteccion/README-deteccion.pdf`.
 ### Material de clase
 | Archivo | Tema |
 |---|---|
-| `ARTEX-caso-de-estudio.pdf` / `.pptx` | Presentación (30 slides, con notas del orador) |
+| `ARTEX-caso-de-estudio.pdf` / `.pptx` | Presentación (32 slides, con notas del orador) |
 | `HANDOUT-alumnos.pdf` / `.md` | Hoja resumen para repartir |
 | `GLOSARIO.md` | Términos clave explicados |
-| `01-arquitectura-artex.md` | Agentes, skills, planner, retest, stack |
-| `02-fallas-seguridad.md` | Fallas del propio ARTEX |
-| `03-timeline-abuso.md` | Cronología + estado actual (nov 2026) |
-| `04-licencia-agpl.md` | Licencia AGPL-3.0 |
-| `06-material-clase.md` | Guía del práctico |
-| `07-desarrollo-del-framework.md` | Desarrollador, Norma, casos/FBI |
-| `08-enseñanzas.md` | Metodología y enseñanzas |
-| `09-analisis-del-proyecto.md` | Cómo está construido, cómo evoluciona, qué hacer al descargarlo |
+| `ARTEX-para-alumnos.mp4` | Video resumen narrado (~4 min) con placas de prensa reales |
+| `clase/01-arquitectura-artex.md` | Agentes, skills, planner, retest, stack |
+| `clase/02-fallas-seguridad.md` | Fallas del propio ARTEX |
+| `clase/03-timeline-abuso.md` | Cronología + estado actual (nov 2026) |
+| `clase/04-licencia-agpl.md` | Licencia AGPL-3.0 |
+| `clase/05-material-clase.md` | Guía del práctico |
+| `clase/06-desarrollo-del-framework.md` | Desarrollador, Norma, casos/FBI |
+| `clase/07-ensenanzas.md` | Metodología y enseñanzas |
+| `clase/08-analisis-del-proyecto.md` | Cómo está construido, cómo evoluciona, qué hacer al descargarlo |
 
 ## Fuentes
 
 Reportes públicos (CSA, Censys, SOCRadar, Brandefense, Ostorlab, Dark Reading, Obsidian
 Security, CERT-EU, Microsoft, Mandiant/Google, Wiz) y revisión directa del código. URLs al pie
 de cada documento.
+
+## Licencia
+
+Material educativo y documentación bajo **CC BY 4.0**; el código de `deteccion/` bajo **MIT**. Ver `LICENSE`. ARTEX no se incluye ni redistribuye (su código es AGPL-3.0 de sus autores).
 
 _Autor: Fernando Boiero — Investigador principal. Material educativo; citar la fuente al reutilizar._
