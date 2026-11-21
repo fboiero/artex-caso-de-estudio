@@ -71,6 +71,9 @@ sin ejecutar ARTEX. Ver `deteccion/README-deteccion.pdf`.
 | `clase/07-ensenanzas.md` | Metodología y enseñanzas |
 | `clase/08-analisis-del-proyecto.md` | Cómo está construido, cómo evoluciona, qué hacer al descargarlo |
 
+### Reproducibilidad (`generadores/`)
+Scripts con los que se generaron el deck y el video (pptxgenjs + pipeline ffmpeg/Python). No hacen falta para usar el material; sirven para regenerarlo. Ver `generadores/README.md`.
+
 ## Fuentes
 
 Reportes públicos (CSA, Censys, SOCRadar, Brandefense, Ostorlab, Dark Reading, Obsidian
